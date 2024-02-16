@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: ID!
+  username: String!
+  email: String!
+  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  tasks: [String!]
+  team: [String!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Team {
+  _id: ID!
+  name: String!
+  description: String!
+  admin: ID
+  members: [String!]
+}
+
+type Task {
+  _id: ID!
+  title: String!
+  description: String!
+  assignedTo: ID
+  status: String!
+}
+
+type Query {
+  users: [User!]!
+  user(_id: String!): User!
+  validateUser(field: String!, password: String!): User!
+  tasks: [Task!]!
+  task(_id: String!): Task!
+  teams: [Team!]!
+  team(_id: String!): Team!
+}
+
+type Mutation {
+  createUser(username: String!, email: String!, password: String!): User!
+  deleteUser(_id: String!): User!
+  createTask(title: String!, description: String!, assignedTo: String!, status: String!): Task!
+  deleteTask(_id: String!): Task!
+  updateTask(_id: String!, input: UpdateTaskInput!): Task!
+  createTeam(name: String!, description: String!, admin: String!): Team!
+  deleteTeam(_id: String!): Team!
+  updateTeam(_id: String!, input: UpdateTeamInput!): Team!
+}
+
+input UpdateTaskInput {
+  assignedTo: String
+  status: String
+  _id: ID!
+}
+
+input UpdateTeamInput {
+  _id: ID!
+  members: [String!]!
+}

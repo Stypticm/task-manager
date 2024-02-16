@@ -1,0 +1,19 @@
+version: '1'
+services:
+  my-mongodb:
+    image: mongo
+    container_name: my-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: task_manager
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
