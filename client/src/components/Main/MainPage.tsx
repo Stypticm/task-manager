@@ -3,13 +3,18 @@ import Layout, { Content, Header } from 'antd/es/layout/layout'
 import LeftColumn from '../Menu/LeftColumn'
 import SearchBar from '../UpperBars/SearchBar'
 import ProjectBar from '../UpperBars/ProjectBar'
-import MainContent from './Dashboard'
-import { Outlet, Route, Routes } from 'react-router-dom'
-import Projects from '../Projects/Projects'
-import Tasks from '../Tasks/Tasks'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 
 const MainPage = () => {
+
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+  if (!token) {
+    navigate('/login')
+    return null;
+  }
+
   return (
     <Layout className='h-full w-full'>
       <Sider width="200px" className='h-full' style={{ background: '#fff' }}>

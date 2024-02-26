@@ -7,11 +7,13 @@ import { useApolloClient } from '@apollo/client'
 import { MUTATION_CREATE_USER } from '../../graphql/mutation/mutation_create_user'
 import AuthForm from './AuthForm'
 import RegForm from './RegForm'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
     const apolloClient = useApolloClient()
     const [variant, setVariant] = useState<'login' | 'register'>('login')
     const [form] = Form.useForm();
+    let navigate = useNavigate()
 
     const toggleVariant = () => {
         setVariant(variant === 'login' ? 'register' : 'login')
@@ -31,8 +33,14 @@ const LoginPage = () => {
                 if (error) {
                     console.error('Error during refetch:', error);
                 }
-                if (data) {
-                    console.log('Data after refetch:', data);
+                if (data && data.validateUser) {
+                    const { _id, username, email, token } = data.validateUser;
+                    console.log('Data after refetch:', { _id, username, email });
+
+
+                    localStorage.setItem('token', token);
+
+                    navigate('/main/dashboard')
                 }
             } catch (error) {
                 console.error('Error in onFinish:', error);

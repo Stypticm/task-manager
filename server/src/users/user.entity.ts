@@ -11,6 +11,9 @@ export class User {
     
     @Field()
     email: string;
+
+    @Field()
+    token?: string;
     
     @Field()
     password: string;
