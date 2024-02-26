@@ -31,7 +31,7 @@ export class UsersResolver {
     async validateUser(
         @Args('field') field: string,
         @Args('password') password: string
-    ): Promise<User> {
+    ): Promise<User | null> {
         return this.usersService.validateUser(field, password);
     }
 

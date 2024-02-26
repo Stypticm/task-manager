@@ -4,6 +4,7 @@ import { User } from './user.entity';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { CreateUserInput } from './dto/create-user.input';
+import { sign } from 'jsonwebtoken'
 
 @Injectable()
 export class UsersService {
@@ -18,7 +19,7 @@ export class UsersService {
 
     async getUserById(id: string): Promise<User> {
         try {
-            
+
             if (!id) {
                 return null;
             }
@@ -59,7 +60,9 @@ export class UsersService {
             return null;
         }
 
-        return user.toObject();
+        const token = sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+
+        return { ...user.toObject(), token };
     }
 
     async deleteUser(id: string): Promise<User> {
