@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { CreateUserInput } from './dto/create-user.input';
 import { sign } from 'jsonwebtoken'
+import { AES } from 'crypto-js';
 
 @Injectable()
 export class UsersService {
@@ -61,8 +62,9 @@ export class UsersService {
         }
 
         const token = sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        const encryptedData = AES.encrypt(JSON.stringify({ userId: user._id, username: user.username, email: user.email }), process.env.SECRET_KEY_COOKIE).toString();
 
-        return { ...user.toObject(), token };
+        return { ...user.toObject(), token, encryptedData };
     }
 
     async deleteUser(id: string): Promise<User> {

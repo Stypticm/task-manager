@@ -16,11 +16,11 @@ const MainPage = () => {
   }
 
   return (
-    <Layout className='h-full w-full'>
+    <Layout className='h-full w-full divide-x-2 divide-slate-300'>
       <Sider width="200px" className='h-full' style={{ background: '#fff' }}>
         <LeftColumn />
       </Sider>
-      <Layout>
+      <Layout className='divide-y-2 divide-slate-300'>
         <Header style={{ background: '#fff' }} className='flex justify-between italic font-bold'>
           <SearchBar />
           <ProjectBar />

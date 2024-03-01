@@ -14,6 +14,9 @@ export class User {
 
     @Field()
     token?: string;
+
+    @Field()
+    encryptedData?: string;
     
     @Field()
     password: string;

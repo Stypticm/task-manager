@@ -8,27 +8,32 @@ import Dashboard from './components/Main/Dashboard'
 import Tracking from './components/Tracking/Tracking'
 import CalendarComponent from './components/Calendar/CalendarComponent'
 import Notifications from './components/Notifications/Notifications'
+import Profile from './components/Profile/Profile'
+import { DataStorageProvider } from './components/context/DataStorageContext'
 
 
 const App = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
-      <Router>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/main" element={<MainPage />}>
-            <Route path='dashboard' element={<Dashboard />} /> */
-            <Route path="projects" element={<Projects />} />
-            <Route path="tasks" element={<Tasks />} />
-            <Route path="tracking" element={<Tracking />} />
-            <Route path="calendar" element={<CalendarComponent />} />
-            <Route path="notifications" element={<Notifications />} />
-            <Route path="*" element={<p className='text-red-500'>There's nothing here: 404!</p>} />
-          </Route>
-        </Routes>
-      </Router>
+      <DataStorageProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/main" element={<MainPage />}>
+              <Route path='dashboard' element={<Dashboard />} /> */
+              <Route path="projects" element={<Projects />} />
+              <Route path="tasks" element={<Tasks />} />
+              <Route path="tracking" element={<Tracking />} />
+              <Route path="calendar" element={<CalendarComponent />} />
+              <Route path="notifications" element={<Notifications />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="*" element={<p className='text-red-500'>There's nothing here: 404!</p>} />
+            </Route>
+          </Routes>
+        </Router>
+      </DataStorageProvider>
     </div>
   )
 }

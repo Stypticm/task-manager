@@ -14,6 +14,9 @@ export class User extends Document {
     @Prop({ default: null })
     token?: string;
 
+    @Prop({ default: null })
+    encryptedData?: string;
+
     @Prop({ required: true })
     password: string;
 
