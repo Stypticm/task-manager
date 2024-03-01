@@ -1,13 +1,18 @@
 import { useState } from 'react'
-import { Button, Form } from 'antd'
-import Title from 'antd/es/typography/Title'
-import { FieldType } from '../../utils/types'
-import { QUERY_VALIDATE_USER } from '../../graphql/queries/validation_user'
-import { useApolloClient } from '@apollo/client'
-import { MUTATION_CREATE_USER } from '../../graphql/mutation/mutation_create_user'
+import { useNavigate } from 'react-router-dom'
 import AuthForm from './AuthForm'
 import RegForm from './RegForm'
-import { useNavigate } from 'react-router-dom'
+
+import { Button, Form } from 'antd'
+import Title from 'antd/es/typography/Title'
+
+import { FieldType } from '../../utils/types'
+
+import { useApolloClient } from '@apollo/client'
+import { QUERY_VALIDATE_USER } from '../../graphql/queries/validation_user'
+import { MUTATION_CREATE_USER } from '../../graphql/mutation/mutation_create_user'
+
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
     const apolloClient = useApolloClient()
@@ -34,10 +39,10 @@ const LoginPage = () => {
                     console.error('Error during refetch:', error);
                 }
                 if (data && data.validateUser) {
-                    const { _id, username, email, token } = data.validateUser;
-                    console.log('Data after refetch:', { _id, username, email });
-
-
+                    const { _id, username, email, token, encryptedData } = data.validateUser;
+                    // console.log('Data after refetch:', { _id, username, email, token, encryptedData });
+                    
+                    Cookies.set('userData', encryptedData, { expires: 7 });
                     localStorage.setItem('token', token);
 
                     navigate('/main/dashboard')

@@ -1,6 +1,6 @@
 import Greetings from './Greetings'
-import ProjectStatistics from './ProjectStatistics'
 import ProjectHighUrgency from './ProjectHighUrgency'
+import ProjectStatistics from './ProjectStat/ProjectStatistics'
 import TeamMember from './TeamMember'
 
 const Dashboard = () => {

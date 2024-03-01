@@ -7,6 +7,7 @@ export const QUERY_VALIDATE_USER = gql`
                 email
                 _id
                 token
+                encryptedData
         }
     }
 `
