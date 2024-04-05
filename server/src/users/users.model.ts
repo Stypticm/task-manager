@@ -30,7 +30,10 @@ export class User extends Document {
     tasks?: string[];
 
     @Prop({ type: Types.ObjectId, ref: 'Team', default: [] })
-    team?: string[];
+    teams?: string[];
+
+    @Prop({ type: Types.ObjectId, ref: 'Project', default: [] })
+    projects?: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

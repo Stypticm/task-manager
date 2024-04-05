@@ -12,7 +12,8 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime
   tasks: [String!]
-  team: [String!]
+  teams: [String!]
+  projects: [String!]
 }
 
 """
@@ -36,6 +37,14 @@ type Task {
   status: String!
 }
 
+type Project {
+  _id: ID!
+  title: String!
+  description: String!
+  assignedTo: ID
+  status: String!
+}
+
 type Query {
   users: [User!]!
   user(_id: String!): User!
@@ -44,6 +53,8 @@ type Query {
   task(_id: String!): Task!
   teams: [Team!]!
   team(_id: String!): Team!
+  projects: [Project!]!
+  project(_id: String!): Project!
 }
 
 type Mutation {
@@ -55,6 +66,9 @@ type Mutation {
   createTeam(name: String!, description: String!, admin: String!): Team!
   deleteTeam(_id: String!): Team!
   updateTeam(_id: String!, input: UpdateTeamInput!): Team!
+  createProject(title: String!, description: String!, assignedTo: String!, status: String!): Project!
+  deleteProject(_id: String!): Project!
+  updateProject(_id: String!, input: UpdateProjectInput!): Project!
 }
 
 input UpdateTaskInput {
@@ -66,4 +80,9 @@ input UpdateTaskInput {
 input UpdateTeamInput {
   _id: ID!
   members: [String!]!
+}
+
+input UpdateProjectInput {
+  assignedTo: String
+  _id: ID!
 }

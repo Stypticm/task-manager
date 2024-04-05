@@ -31,5 +31,8 @@ export class User {
     tasks?: MongooseSchema.Types.ObjectId[];
     
     @Field(type => [String], { nullable: true })
-    team?: MongooseSchema.Types.ObjectId[];
+    teams?: MongooseSchema.Types.ObjectId[];
+
+    @Field(type => [String], { nullable: true })
+    projects?: MongooseSchema.Types.ObjectId[];
 }

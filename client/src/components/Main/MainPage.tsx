@@ -16,20 +16,16 @@ const MainPage = () => {
   }
 
   return (
-    <Layout className='h-full w-full divide-x-2 divide-slate-300'>
-      <Sider width="200px" className='h-full' style={{ background: '#fff' }}>
-        <LeftColumn />
-      </Sider>
-      <Layout className='divide-y-2 divide-slate-300'>
-        <Header style={{ background: '#fff' }} className='flex justify-between italic font-bold'>
+    <div className="bg-slate-500 h-screen flex">
+      <LeftColumn />
+      <div className='flex-grow overflow-auto'>
+        <header className='flex justify-center items-center max-[380px]:flex-col'>
           <SearchBar />
           <ProjectBar />
-        </Header>
-        <Content className='h-full w-full'>
-          <Outlet />
-        </Content>
-      </Layout>
-    </Layout>
+        </header>
+        <Outlet />
+      </div>
+    </div>
   )
 }
 

@@ -8,6 +8,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TeamsModule } from './teams/teams.module';
 import { TasksModule } from './tasks/tasks.module';
 import { UsersModule } from './users/users.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { UsersModule } from './users/users.module';
       pass: 'example',
       dbName: 'task_manager',
     }),
-    UsersModule, TasksModule, TeamsModule
+    UsersModule, TasksModule, TeamsModule, ProjectsModule
   ],
   controllers: [AppController],
   providers: [AppService],
